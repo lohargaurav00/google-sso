@@ -2,20 +2,23 @@
 import * as React from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import jwtDecode from "jwt-decode";
+import { useRouter } from "next/navigation";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 import styles from "./page.module.css";
 import { LoginContext } from "@/context";
-import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function Home() {
-  const {setUserProfile} = React.useContext(LoginContext) as any;
+  const googleAuthId: string = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || "";
+  const { setUserProfile } = React.useContext(LoginContext) as any;
   const router = useRouter();
   // @success handling
   // accessed credentials of user from google login
   const handleLoginSuccess = (credentialResponse: any) => {
     const { credential } = credentialResponse; // destructuring credentials from response
     const object: any = jwtDecode(credential); // decoding to get user details
-    console.log(object)
+    console.log(object);
     setUserProfile(object); // setting user details to state
     router.push(`/${object.sub}`); // redirecting to user profile page
   };
@@ -27,16 +30,27 @@ export default function Home() {
   };
 
   return (
-    <main className={styles.container}>
-      <GoogleLogin
-        onSuccess={(credentialResponse) => {
-          handleLoginSuccess(credentialResponse);
-        }}
-        onError={() => {
-          handleLoginError();
-        }}
-        useOneTap
-      />
-    </main>
+    <GoogleOAuthProvider clientId={googleAuthId}>
+      <main className={styles.container}>
+        <h1 className={styles.title}>Welcome to Google OAuth</h1>
+        <div className={styles.card_container}>
+          <Image
+            src="/login_vector.png"
+            alt="vector"
+            width={250}
+            height={250}
+          />
+          <GoogleLogin
+            onSuccess={(credentialResponse) => {
+              handleLoginSuccess(credentialResponse);
+            }}
+            onError={() => {
+              handleLoginError();
+            }}
+            useOneTap
+          />
+        </div>
+      </main>
+    </GoogleOAuthProvider>
   );
 }

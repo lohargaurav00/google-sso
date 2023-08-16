@@ -1,0 +1,104 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-radius: 16px;
+  
+  .card_collapse {
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    padding: 2rem;
+    gap: 1.5rem;
+    background-color: hsl(var(--primary));
+
+    border: 2px solid hsl(var(--tertiary));
+    display: flex;
+    flex-direction: row;
+    z-index: 1;
+
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card_image {
+      border-radius: 12px;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .card_content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-end;
+      text-align: left;
+      gap: 8px;
+
+      .card_header {
+        font-weight: bold;
+        font-size: 1.7rem;
+        white-space: pre-wrap;
+      }
+
+      .card_shortdesc {
+        color: hsl(var(--secondary));
+        font-size: 1.25rem;
+        white-space: pre-wrap;
+      }
+
+      .card_button {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+        color: hsl(var(--foreground));
+        outline: none;
+        border: 2px solid hsl(var(--tertiary));
+        font-size: 1rem;
+        font-weight: bold;
+        padding: 0.5rem 1rem;
+        border-radius: 32px;
+        cursor: pointer;
+
+        .button_icon {
+          width: 24px;
+          height: 24px;
+          transition: all 0.3s ease;
+        }
+
+        .button_icon_active {
+          transform: rotate(180deg);
+        }
+      }
+      .card_button:hover {
+        background-color: hsl(var(--tertiary));
+      }
+    }
+  }
+  .card_collapse_active {
+    z-index: 4;
+  }
+
+  .card_description {
+    display: block;
+    position: absolute;
+    top: 0;
+    transition: all 0.3s ease;
+    padding: 2rem;
+    background-color: hsl(var(--primary));
+    border-radius: 16px;
+    border: 2px solid hsl(var(--tertiary));
+  }
+
+  .card_description_active {
+    top: 90%;
+    z-index: 2;
+  }
+}
+.card:hover {
+  box-shadow: 0 8px 30px 0 hsla(var(--tertiary), 0.6);
+}

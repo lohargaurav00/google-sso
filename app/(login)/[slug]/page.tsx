@@ -3,9 +3,11 @@ import * as React from "react";
 import { LoginContext } from "@/context";
 import { notFound } from "next/navigation";
 import data from "./dummy.json";
+import Image from "next/image";
 
 import style from "./page.module.css";
-import Image from "next/image";
+import { Card } from "@/components";
+import { getBlogPosts } from "@/utils";
 
 interface Props {
   params: {
@@ -18,11 +20,18 @@ const Page: React.FC<Props> = ({ params }) => {
 
   //using context to access user profile with destructuring
   const { userProfile } = React.useContext(LoginContext) as any;
+  const [blogs, setBlogs] = React.useState<any[]>([]);
 
   //if userProfile null or  userProfile.sub value not equal to the slug router then return page not found
   // if (!userProfile || userProfile.sub !== slug) {
   //   return notFound();
   // }
+
+  React.useEffect(() => {
+    getBlogPosts().then((res) => {
+      setBlogs(res);
+    });
+  }, []);
 
   return (
     <div className={style.container}>
@@ -35,11 +44,39 @@ const Page: React.FC<Props> = ({ params }) => {
             height={200}
             className={style.image}
           />
-          <div className={style.name}>{data.name}</div>
-          <div className={style.email}>{data.email}</div>
+          <div className={style.content}>
+            <span className={style.content_label}>Name</span>
+            <div className={style.content_name}>{data.name}</div>
+          </div>
+          <div className={style.content}>
+            <span className={style.content_label}>Email</span>
+            <div className={style.content_name}>{data.email}</div>
+          </div>
         </div>
       </div>
-      <div className={style.cards_container}>xyz</div>
+      <div className={style.cards_container}>
+        {/* 
+        @contentful blogs
+        destructuring the data from the response for card component
+        heading = blogs.fields.title
+        description = blogs.fields.blogText
+        shortDescription = blogs.fields.description.content[0].content[0].value
+        src = blogs.fields.image.fields.file.url 
+      */}
+        {blogs.map((blog, index) => {
+          return (
+            <Card
+              key={index}
+              heading={blog.fields.title}
+              src={`https:${blog.fields.image.fields.file.url}`}
+              description={blog.fields.blogText}
+              shortDescription={
+                blog.fields.description.content[0].content[0].value
+              }
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };
