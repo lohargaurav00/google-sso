@@ -1,3 +1,5 @@
+
+/* @root global variables */
 :root {
   --font-Inter: "Inter", sans-serif;
 
@@ -10,18 +12,16 @@
 
   --max-width: 100vw;
   --max-height: 100vh;
-
-  --font-size-sm: 12px
-  --font-size-md: 14px
-  --font-size-base: 16px
-  --font-size-lg: 18px
 }
 
+/* @setting root margin, padding, box-sizing */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
+/* @setting scrollbar */
 
 /* Firefox */
 * {
@@ -45,18 +45,24 @@
   border: 3px solid hsl(var(--background));
 }
 
+/* @setting global */
 html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
 }
 
+/* @setting body  */
 body {
   background: hsl(var(--background));
   color: hsl(var(--foreground));
 }
 
+/* @setting anchor tag initial */
+
 a {
   color: initial;
   text-decoration: none;
 }
+
+

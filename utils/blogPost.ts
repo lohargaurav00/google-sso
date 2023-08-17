@@ -1,12 +1,18 @@
+"use client";
 import { createClient } from "contentful";
 
-const spaceId = process.env.CONTENTFUL_SPACE_ID || "";
-const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN || "";
+const spaceId = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID || "";
+const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN || "" ;
+
+export const test = () => {
+  console.log(spaceId)
+  console.log(accessToken)
+}
 
 
 const client = createClient({
-  space: "bz0oupashgdm",
-  accessToken: "TpWQUVefv2K0Dh9p4jyTc5PcyJBHBnrAHBP_ckyZj5Q",
+  space: spaceId,
+  accessToken: accessToken,
 });
 
 // Retrieve the list of blog posts from Contentful
