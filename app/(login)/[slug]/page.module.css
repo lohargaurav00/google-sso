@@ -12,69 +12,80 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    min-height: var(--max-height);
   }
 
   @media screen and (max-width: 768px) {
-    min-height: var(--max-height);
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     gap: 3rem;
     padding: 2rem;
   }
-}
 
-.details {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: auto;
-  height: auto;
-  padding: 2rem;
-  gap: 1.5rem;
-  background-color: hsl(var(--primary));
-  border-radius: 16px;
-  border: 2px solid hsl(var(--tertiary));
-  cursor: pointer;
-  animation: zoomIn 0.3s ease-in-out;
 
-  .image {
-    border-radius: 100%;
-  }
-
-  .content {
+  .details {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    width: 100%;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: auto;
+    padding: 2rem;
+    gap: 1.5rem;
+    background-color: hsl(var(--primary));
+    border-radius: 16px;
+    border: 2px solid hsl(var(--tertiary));
+    cursor: pointer;
+    animation: zoomIn 0.3s ease-in-out;
 
-    gap: 4px;
-    font-weight: 700;
-    font-size: 1.2rem;
+    .image {
+      border-radius: 100%;
+    }
 
-    .content_name {
-      color: hsl(var(--secondary));
+    .content {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      width: 100%;
+
+      gap: 4px;
+      font-weight: 700;
+      font-size: 1.2rem;
+
+      .content_name {
+        color: hsl(var(--secondary));
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      padding: 1rem;
+      gap: 1rem;
+      .content {
+        gap: 2px;
+        font-size: 1rem;
+      }
+      .image {
+        width: 150px;
+        height: 150px;
+      }
     }
   }
-}
+  .details:hover {
+    box-shadow: 0 8px 30px 0 hsla(var(--tertiary), 0.6);
+  }
 
-.details:hover {
-  box-shadow: 0 8px 30px 0 hsla(var(--tertiary), 0.6);
-}
+  .cards_container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
 
-.cards_container {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  width: 100%;
-
-  @media screen and (min-width: 1024px) {
-    max-height: 90vh;
-    overflow-y: auto;
-    overflow-x: hidden;
+    @media screen and (min-width: 1024px) {
+      max-height: 90vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
   }
 }
 

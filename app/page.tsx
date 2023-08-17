@@ -18,7 +18,6 @@ export default function Home() {
   const handleLoginSuccess = (credentialResponse: any) => {
     const { credential } = credentialResponse; // destructuring credentials from response
     const object: any = jwtDecode(credential); // decoding to get user details
-    console.log(object);
     setUserProfile(object); // setting user details to state
     router.push(`/${object.sub}`); // redirecting to user profile page
   };
